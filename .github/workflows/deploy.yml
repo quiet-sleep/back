@@ -30,10 +30,12 @@ jobs:
           source: "target"
           target: "/root/databaseProject"
       - name: exec restart shell
-        uses: tarunjangra/ssh-remote-cmd@v1
+        uses: appleboy/ssh-action@master
         with:
-          command: |
-            kill $(ps -ef|grep '[m]ybatis'|awk '{print $2}')&&java -jar /***/databaseProject/target/mybatis_plus01-1.0-SNAPSHOT.jar>/***/out &
+          script: |
+            kill $(ps -ef|grep '[m]ybatis'|awk '{print $2}')
+            java -jar /root/databaseProject/target/mybatis_plus01-1.0-SNAPSHOT.jar>/root/out&
           host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USERNAME }}
-          pass: ${{ secrets.SSH_PASSWD }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          password: ${{ secrets.SSH_PASSWD }}
