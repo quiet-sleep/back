@@ -74,7 +74,7 @@ public class Controller {
     }
     @GetMapping("/api/test")
     public ResultData<String> get(){
-        return ResultData.success("test CI@2");
+        return ResultData.success("test CI@3");
     }
     @GetMapping("/api/yoydod")
     public ResultData<String> yoydod(@RequestParam("block") String block){
