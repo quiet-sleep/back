@@ -33,9 +33,7 @@ jobs:
         uses: tarunjangra/ssh-remote-cmd@v1
         with:
           command: |
-            kill $(ps -ef|grep '[m]ybatis'|awk '{print $2}')
-            sleep 3
-            java -jar /root/databaseProject/target/mybatis_plus01-1.0-SNAPSHOT.jar>/root/out &
+            kill $(ps -ef|grep '[m]ybatis'|awk '{print $2}')&&java -jar /***/databaseProject/target/mybatis_plus01-1.0-SNAPSHOT.jar>/***/out &
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USERNAME }}
           pass: ${{ secrets.SSH_PASSWD }}
