@@ -32,7 +32,7 @@ jobs:
       - name: exec restart shell
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: /root/restartService.sh
+          command: /root/restartService.sh&&exit
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWD }}
