@@ -34,6 +34,7 @@ jobs:
         with:
           script: |
             kill $(ps -ef|grep '[m]ybatis'|awk '{print $2}')
+            sleep 3
             java -jar /root/databaseProject/target/mybatis_plus01-1.0-SNAPSHOT.jar>/root/out&
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
