@@ -34,7 +34,7 @@ jobs:
         with:
           command: |
             ps -ef|grep '[m]ybatis'|awk '{print $2}'
-            java -jar /root/databaseProject/mybatis_plus01-1.0-SNAPSHOT.jar>/root/out &
+            java -jar /root/databaseProject/target/mybatis_plus01-1.0-SNAPSHOT.jar>/root/out &
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_USERNAME }}
           pass: ${{ secrets.SSH_PASSWD }}
