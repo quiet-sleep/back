@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -206,8 +208,14 @@ public class Controller {
         return ResultData.success(gson.toJson(show));
     }
     @GetMapping("/getLists")
-    public ResultData<String> getStudents(){
-        List<Visitor> visitors = visitorMapper.selectList(null);
+    public ResultData<String> getStudents(@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime) throws ParseException {
+        QueryWrapper<Visitor> QueryWrapper = new QueryWrapper<Visitor>();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        long start = sf.parse(startTime).getTime();
+        long end = sf.parse(endTime).getTime();
+        QueryWrapper.lambda().ge(Visitor::getStart,new Timestamp(start)).le(Visitor::getStart,new Timestamp(end));
+        List<Visitor> visitors = visitorMapper.selectList(QueryWrapper);
         return ResultData.success(gson.toJson(visitors));
     }
 }
