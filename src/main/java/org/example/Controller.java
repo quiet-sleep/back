@@ -47,7 +47,7 @@ public class Controller {
 //    }
 
 
-    @GetMapping("/report")
+    @GetMapping("/api/report")
     public ResultData<String> report(@RequestHeader Map<String,String> headers,@RequestParam("block") String block,
                                          @RequestParam("lasttime") String lasttime,@RequestParam("from") String from,
                                          @RequestParam("session") String session){
@@ -74,11 +74,11 @@ public class Controller {
         }
         return ResultData.success("OK!");
     }
-    @GetMapping("/test")
+    @GetMapping("/api/test")
     public ResultData<String> get(){
         return ResultData.success("OK!");
     }
-    @GetMapping("/yoydod")
+    @GetMapping("/api/yoydod")
     public ResultData<String> yoydod(@RequestParam("block") String block){
         //-----------变量名----------------------------
         int lastdayFlow,todayFlow,lastMonthFlow,nowMonthFlow;
@@ -207,7 +207,7 @@ public class Controller {
 
         return ResultData.success(gson.toJson(show));
     }
-    @GetMapping("/getLists")
+    @GetMapping("/api/getLists")
     public ResultData<String> getStudents(@RequestParam("startTime") String startTime,@RequestParam("endTime") String endTime) throws ParseException {
         QueryWrapper<Visitor> QueryWrapper = new QueryWrapper<Visitor>();
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
