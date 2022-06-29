@@ -218,4 +218,31 @@ public class Controller {
         List<Visitor> visitors = visitorMapper.selectList(QueryWrapper);
         return ResultData.success(gson.toJson(visitors));
     }
+    @GetMapping("/insertData")
+    public ResultData<String> insertData(@RequestHeader Map<String,String> headers,@RequestParam("block") String block,
+                                         @RequestParam("lasttime") String lasttime,@RequestParam("from") String from,
+                                         @RequestParam("starttime") String starttime,@RequestParam("session") String session){
+
+        QueryWrapper<Visitor> queryWrapper = new QueryWrapper<Visitor>();
+        queryWrapper.eq("session",session);
+        queryWrapper.eq("token",headers.get("token"));
+        List<Visitor> visitors = visitorMapper.selectList(queryWrapper);
+        if(visitors.size() == 0)
+        {
+            Visitor visitor = new Visitor();
+            visitor.setBlock(block);
+            visitor.setStart(Timestamp.valueOf(lasttime));//往前推10秒
+            visitor.setEnd(Timestamp.valueOf(lasttime));
+            visitor.setSession(session);
+            visitor.setToken(headers.get("token"));
+            visitor.setAgent(headers.get("user-agent"));
+            visitor.setFro(from);
+            visitorMapper.insert(visitor);
+        }
+        else{
+            visitors.get(0).setEnd(Timestamp.valueOf(lasttime));
+            visitorMapper.updateById(visitors.get(0));
+        }
+        return ResultData.success("OK!");
+    }
 }
