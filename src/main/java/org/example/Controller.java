@@ -231,7 +231,7 @@ public class Controller {
         {
             Visitor visitor = new Visitor();
             visitor.setBlock(block);
-            visitor.setStart(Timestamp.valueOf(lasttime));//往前推10秒
+            visitor.setStart(Timestamp.valueOf(starttime));//往前推10秒
             visitor.setEnd(Timestamp.valueOf(lasttime));
             visitor.setSession(session);
             visitor.setToken(headers.get("token"));
