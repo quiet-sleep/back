@@ -218,7 +218,7 @@ public class Controller {
         List<Visitor> visitors = visitorMapper.selectList(QueryWrapper);
         return ResultData.success(gson.toJson(visitors));
     }
-    @GetMapping("/insertData")
+    @GetMapping("/api/insertData")
     public ResultData<String> insertData(@RequestHeader Map<String,String> headers,@RequestParam("block") String block,
                                          @RequestParam("lasttime") String lasttime,@RequestParam("from") String from,
                                          @RequestParam("starttime") String starttime,@RequestParam("session") String session){
